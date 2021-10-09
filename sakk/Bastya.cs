@@ -20,14 +20,18 @@ namespace sakk
         public override List<Tuple<int, int>> LehetsegesLepesek()
         {
             List<Tuple<int, int>> lepesek = new List<Tuple<int, int>>();
-            for (int i = -8; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
-                for (int j = -8; j < 8; i++)
+                if (i != helyX)
                 {
-                    if (i != 0 || j != 0)
-                    {
-                        lepesek.Add(new Tuple<int, int>(helyX + i, helyY + j));
-                    }            
+                    lepesek.Add(new Tuple<int, int>(i, helyY));
+                }
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                if (i != helyY)
+                {
+                    lepesek.Add(new Tuple<int, int>(helyX, i));
                 }
             }
             return lepesek;

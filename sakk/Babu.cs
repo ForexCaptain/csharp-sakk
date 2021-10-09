@@ -19,7 +19,7 @@ namespace sakk
         {
             this.helyX = helyX;
             this.helyY = helyY;
-            this.Szin = szin;
+            Szin = szin;
             Jeloles = " ";
         }
 
