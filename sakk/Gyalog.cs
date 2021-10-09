@@ -19,15 +19,10 @@ namespace sakk
 
         public override List<Tuple<int,int>> LehetsegesLepesek()
         {
-            List<Tuple<int, int>> lepesek = new List<Tuple<int, int>>();
-            //lépés hozzáadása a listához:
-            //lepesek.Add(new Tuple<int, int>(i érték, j érték));
-            lepesek.Add(new Tuple<int, int>(1, 2));
-            return lepesek;
             throw new NotImplementedException();
         }
 
-        public override List<Tuple<int, int>> JoLepesek()
+        public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
             throw new NotImplementedException();
         }

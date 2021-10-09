@@ -22,7 +22,7 @@ namespace sakk
             throw new NotImplementedException();
         }
 
-        public override List<Tuple<int, int>> JoLepesek()
+        public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
             throw new NotImplementedException();
         }

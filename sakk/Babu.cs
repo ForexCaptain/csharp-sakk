@@ -8,8 +8,8 @@ namespace sakk
 {
     abstract class Babu
     {
-        int helyX;
-        int helyY;
+        protected int helyX;
+        protected int helyY;
         public enum BabuTipus
         {
             Bastya, Huszar, Futo, Kiraly, Vezer, Gyalog
@@ -28,6 +28,6 @@ namespace sakk
         public BabuTipus Tipus { get; protected set; }
 
         public abstract List<Tuple<int, int>> LehetsegesLepesek();
-        public abstract List<Tuple<int, int>> JoLepesek();
+        public abstract List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas);
     }
 }
