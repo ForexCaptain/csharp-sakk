@@ -23,11 +23,15 @@ namespace sakk
             Jeloles = " ";
         }
 
+        public int HelyX { get { return helyX; } set { helyX = value; } }
+        public int HelyY { get { return helyY; } set { helyY = value; } }
+
         public abstract string Jeloles { get; protected set; }
-        public string Szin { get; }
+        public string Szin { get; set; }
         public BabuTipus Tipus { get; protected set; }
 
         public abstract List<Tuple<int, int>> LehetsegesLepesek();
         public abstract List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas);
+        public abstract Babu Copy(Babu hova);
     }
 }

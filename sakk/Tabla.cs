@@ -24,9 +24,20 @@ namespace sakk
         }
 
         //ToDo: metódus megvalósítása
-        public void Lepes(int kezdoHelyX, int kezdoHelyY, int celHelyX, int celHelyY)
+        public bool Lepes(int kezdoHelyX, int kezdoHelyY, int celHelyX, int celHelyY)
         {
-            tablaAllas[kezdoHelyX, kezdoHelyY].JoLepesek(tablaAllas);
+            if (tablaAllas[kezdoHelyX, kezdoHelyY].JoLepesek(tablaAllas).Contains(new Tuple<int, int>(celHelyX, celHelyY)))
+            {
+                tablaAllas[kezdoHelyX, kezdoHelyY].HelyX = celHelyX;
+                tablaAllas[kezdoHelyX, kezdoHelyY].HelyY = celHelyY;
+                tablaAllas[celHelyX, celHelyY] = tablaAllas[kezdoHelyX, kezdoHelyY].Copy(tablaAllas[celHelyX, celHelyY]);
+                tablaAllas[kezdoHelyX, kezdoHelyY] = null;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void TablaKirajzolas()

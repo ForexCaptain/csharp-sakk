@@ -40,9 +40,39 @@ namespace sakk
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
+            List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
+            foreach (var item in lepesek)
+            {
+                bool joE = true;
+                if (helyY != item.Item2)
+                {
+                    for (int i = Math.Min(helyY + 1, item.Item2); i <= Math.Max(helyY - 1, item.Item2); i++)
+                    {
+                        if (tablaAllas[helyX, i] != null && joE)
+                            joE = false;
+                    }
+                }
+                else
+                {
+                    for (int i = Math.Min(helyX + 1, item.Item1); i <= Math.Max(helyX - 1, item.Item1); i++)
+                    {
+                        if (tablaAllas[i, helyY] != null && joE)
+                            joE = false;
+                    }
+                }
 
+                if (joE)
+                {
+                    joLepesek.Add(item);
+                }
+            }
+            return joLepesek;
+        }
 
-            return lepesek;
+        public override Babu Copy(Babu hova)
+        {
+            hova = new Bastya(HelyX, HelyY, Szin);
+            return hova;
         }
     }
 }

@@ -26,5 +26,11 @@ namespace sakk
         {
             throw new NotImplementedException();
         }
+
+        public override Babu Copy(Babu hova)
+        {
+            hova = new Gyalog(HelyX, HelyY, Szin);
+            return hova;
+        }
     }
 }

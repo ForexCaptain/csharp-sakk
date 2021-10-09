@@ -45,11 +45,15 @@ namespace sakk
                                 int celX = Array.IndexOf(betuk, hova[0]);
                                 celY = 8 - celY;
                                 if (s.tablaAllas[kezdoX, kezdoY] != null)
-                                {
-                                    Console.Clear();
-                                    s.Lepes(kezdoX, kezdoY, celX, celY);
-                                    Console.WriteLine("Kilépéshez írjon '-' karaktert!");
-                                    s.TablaKirajzolas();
+                                {                   
+                                    if(s.Lepes(kezdoX, kezdoY, celX, celY))
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Kilépéshez írjon '-' karaktert!");
+                                        s.TablaKirajzolas();
+                                    }
+                                    else
+                                        Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");                             
                                 }
                                 else
                                     Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");

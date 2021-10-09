@@ -26,5 +26,11 @@ namespace sakk
         {
             throw new NotImplementedException();
         }
+
+        public override Babu Copy(Babu hova)
+        {
+            hova = new Huszar(HelyX, HelyY, Szin);
+            return hova;
+        }
     }
 }
