@@ -21,49 +21,6 @@ namespace sakk
         {
            List<Tuple<int,int>> lehetsegesLepesek = new List<Tuple<int, int>>();
                        
-           //if (helyY == 1 || helyY == 6)
-	       //{
-           //    //fekete lepesek
-           //    if (helyY+2<8 || helyY-1>0 || helyX+1<8 || helyX-1>0)
-	       //    {
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY+2));
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY+1));
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY+1));
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY+1));
-	       //    }
-           //    
-           //    else if (helyY-2>0 || helyX+1<8 || helyX-1>0)
-	       //     {
-           //         //feher lepesek
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY-2));
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY-1));
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY-1));
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY-1));
-           //
-	       //     }
-           //    
-	       //}
-           //
-           //else
-	       //{
-           //     if (helyY+1<8 || helyY-1>0 || helyX+1<8 || helyX-1>0)
-	       //     {
-           //         //fekete lepesek
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY+1));
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY+1));
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY+1));
-	       //     }
-           //    
-           //     else if (helyY+1<8 || helyY-1>0 || helyX+1<8 || helyX-1>0)
-	       //     {
-           //         //feher lepesek
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY-1));
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY-1));
-           //         lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY-1));
-	       //     }
-           //    
-	       //}
-
             if (Szin=="fekete")
 	        {
                 if (helyY == 1)
