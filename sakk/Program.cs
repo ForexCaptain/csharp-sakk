@@ -11,6 +11,7 @@ namespace sakk
         static void Main(string[] args)
         {
             //ToDo: Tesztprogram befejezése
+            string kijon = "feher";
             Tabla s;
             Console.Write("Szeretne egy már elkezdett játékot folytatni? (i/n): ");
             if (Console.ReadLine() == "i")
@@ -28,41 +29,46 @@ namespace sakk
             bool stop = false;
             do
             {
+                Console.WriteLine((kijon == "feher" ? "Fehér" : "Fekete") + " következik.");
                 Console.Write("Melyik bábuval szeretne lépni? (pl.: a1): ");
                 string honnan = Console.ReadLine();
                 if (honnan != "-")
                 {
                     if (Array.IndexOf(betuk, honnan[0]) >= 0 && honnan.Length > 1 && int.TryParse(honnan[1].ToString(), out int kezdoY))
                     {
-                        int kezdoX = Array.IndexOf(betuk, honnan[0]);
-                        kezdoY = 8 - kezdoY;
-                        Console.Write("Melyik mezőre szeretne lépni? (pl.: a1): ");
-                        string hova = Console.ReadLine();
-                        if (hova != "-")
+                        if (s.tablaAllas[Array.IndexOf(betuk, honnan[0]), 8 - kezdoY] != null && s.tablaAllas[Array.IndexOf(betuk, honnan[0]), 8 - kezdoY].Szin == kijon) 
                         {
-                            if (Array.IndexOf(betuk, hova[0]) >= 0 && hova.Length > 1 && int.TryParse(hova[1].ToString(), out int celY))
+                            int kezdoX = Array.IndexOf(betuk, honnan[0]);
+                            kezdoY = 8 - kezdoY;
+                            Console.Write("Melyik mezőre szeretne lépni? (pl.: a1): ");
+                            string hova = Console.ReadLine();
+                            if (hova != "-")
                             {
-                                int celX = Array.IndexOf(betuk, hova[0]);
-                                celY = 8 - celY;
-                                if (s.tablaAllas[kezdoX, kezdoY] != null)
-                                {                   
-                                    if(s.Lepes(kezdoX, kezdoY, celX, celY))
+                                if (Array.IndexOf(betuk, hova[0]) >= 0 && hova.Length > 1 && int.TryParse(hova[1].ToString(), out int celY))
+                                {
+                                    int celX = Array.IndexOf(betuk, hova[0]);
+                                    celY = 8 - celY;
+                                    if (s.Lepes(kezdoX, kezdoY, celX, celY))
                                     {
                                         Console.Clear();
                                         Console.WriteLine("Kilépéshez írjon '-' karaktert!");
                                         s.TablaKirajzolas();
+                                        if (kijon == "feher")
+                                            kijon = "fekete";
+                                        else
+                                            kijon = "feher";
                                     }
                                     else
-                                        Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");                             
+                                        Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
                                 }
                                 else
                                     Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
                             }
                             else
-                                Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
+                                stop = true;
                         }
                         else
-                            stop = true;
+                            Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
                     }
                     else
                         Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
