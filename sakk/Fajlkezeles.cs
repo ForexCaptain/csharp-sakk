@@ -46,30 +46,19 @@ namespace sakk
         {
             //ToDo: Játék állás fájlba mentése
             
-            StreamWriter iras = new StreamWriter($"{fajlnev}.txt", true, Encoding.UTF8); //opcionális: $"{fajlnev}_{DateTime.Now}.txt", true, Encoding.UTF8
-            int index = 0;
-
-            Console.WriteLine($"A {DateTime.Now}-i sakkállás a következő:");
+            StreamWriter iras = new StreamWriter(fajlnev, false, Encoding.UTF8);
+            
             for (int i = 0; i < 8; i++)
 			{
                 for (int j = 0; j < 8; j++)
 			    {
                     if (allas[i,j]!=null)
 	                {
-                        iras.WriteLine(allas[i,j].Jeloles, allas[i,j], allas[i,j].Szin);
-                        index++;
+                        iras.WriteLine($"{allas[i,j].Jeloles} {allas[i,j].HelyX} {allas[i,j].HelyY} {allas[i,j].Szin}");
 	                }
-                    else
-	                {
-                        //teszteléshez kiíratás
-                        Console.WriteLine("Itt nincs semmi!");
-                        index++;
-	                }
-                    
 			    }
 			}
-            //teszteléshez kiíratás
-            Console.WriteLine($"Index értéke: {index}");
+            iras.Close();
         }
     }
 }
