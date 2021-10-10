@@ -39,6 +39,7 @@ namespace sakk
 
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
+            //ütés nincs megírva
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
             foreach (var item in lepesek)

@@ -17,7 +17,7 @@ namespace sakk
 
         public override string Jeloles { get; protected set; }
 
-        public override List<Tuple<int,int>> LehetsegesLepesek()
+        public override List<Tuple<int, int>> LehetsegesLepesek()
         {
            List<Tuple<int,int>> lehetsegesLepesek = new List<Tuple<int, int>>();
                        
@@ -41,7 +41,9 @@ namespace sakk
 
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
-            throw new NotImplementedException();
+            List<Tuple<int, int>> lepesek = LehetsegesLepesek();
+
+            return lepesek;
         }
 
         public override Babu Copy(Babu hova)
