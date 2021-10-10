@@ -44,7 +44,6 @@ namespace sakk
         //Laci
         public static void Mentes(string fajlnev, Babu[,] allas)
         {
-            //ToDo: Játék állás fájlba mentése
             
             StreamWriter iras = new StreamWriter(fajlnev, false, Encoding.UTF8);
             
