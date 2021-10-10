@@ -10,17 +10,17 @@ namespace sakk
     {
         static void Main(string[] args)
         {
-            //ToDo: Tesztprogram elkészítése
+            //ToDo: Tesztprogram befejezése
             Tabla s;
             Console.Write("Szeretne egy már elkezdett játékot folytatni? (i/n): ");
             if (Console.ReadLine() == "i")
             {
-                Console.WriteLine();
                 //Elkezdett játék betöltése
-                Console.Write("Adja meg a fájl nevét! (pl.: alap.txt): ");
+                Console.Write("Adja meg a fájl nevét! (pl.: mentes.txt): ");
                 s = new Tabla(Console.ReadLine());              
             }
             else
+                //Új játék kezdése
                 s = new Tabla();
             Console.WriteLine("Kilépéshez írjon '-' karaktert!");
             s.TablaKirajzolas();
@@ -32,7 +32,7 @@ namespace sakk
                 string honnan = Console.ReadLine();
                 if (honnan != "-")
                 {
-                    if (Array.IndexOf(betuk, honnan[0]) >= 0 && int.TryParse(honnan[1].ToString(), out int kezdoY))
+                    if (Array.IndexOf(betuk, honnan[0]) >= 0 && honnan.Length > 1 && int.TryParse(honnan[1].ToString(), out int kezdoY))
                     {
                         int kezdoX = Array.IndexOf(betuk, honnan[0]);
                         kezdoY = 8 - kezdoY;
@@ -40,7 +40,7 @@ namespace sakk
                         string hova = Console.ReadLine();
                         if (hova != "-")
                         {
-                            if (Array.IndexOf(betuk, hova[0]) >= 0 && int.TryParse(hova[1].ToString(), out int celY))
+                            if (Array.IndexOf(betuk, hova[0]) >= 0 && hova.Length > 1 && int.TryParse(hova[1].ToString(), out int celY))
                             {
                                 int celX = Array.IndexOf(betuk, hova[0]);
                                 celY = 8 - celY;
@@ -70,6 +70,24 @@ namespace sakk
                 else
                     stop = true;
             } while (!stop);
+            Console.Write("Szeretné elmenteni az állást? (i/n): ");
+            if (Console.ReadLine() == "i")
+            {
+                bool mentve = false;
+                while (!mentve)
+                {
+                    Console.Write("Adja meg mi legyen a fájl neve! (pl.: mentes.txt): ");
+                    string fajlnev = Console.ReadLine();
+                    if (!fajlnev.StartsWith(".") && fajlnev.EndsWith(".txt"))
+                    {
+                        Fajlkezeles.Mentes(fajlnev, s.tablaAllas);
+                        mentve = true;
+                        Console.WriteLine("Sikeres mentés!");
+                    }
+                    else
+                        Console.WriteLine("Hibás fájlnév! Adjon meg egy új fájlnevet!");
+                }
+            }
             Console.ReadKey();
         }
     }

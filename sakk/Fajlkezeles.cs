@@ -42,7 +42,7 @@ namespace sakk
         }
 
         //Laci
-        public static void Mentes(Babu[,] allas)
+        public static void Mentes(string fajlnev, Babu[,] allas)
         {
             //ToDo: Játék állás fájlba mentése
         }
