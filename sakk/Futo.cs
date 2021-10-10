@@ -19,7 +19,7 @@ namespace sakk
 
         public override List<Tuple<int, int>> LehetsegesLepesek()
         {
-            List<Tuple<int, int>> lepesek = LehetsegesLepesek();
+            List<Tuple<int, int>> lepesek = new List<Tuple<int, int>>();
 
             //jobbra fel
             for (int i = 1; i < 8; i++)
