@@ -21,22 +21,35 @@ namespace sakk
         {
            List<Tuple<int,int>> lehetsegesLepesek = new List<Tuple<int, int>>();
                        
-           if (helyY == 2)
+           if (helyY == 1 || helyY == 6)
 	       {
-                
-               lehetsegesLepesek.Add(new Tuple<int, int>(helyX, 4));
+               //fekete lepesek
+               lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY+2));
+               lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY+1));
+               lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY+1));
+               lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY+1));
+
+               //feher lepesek
+               lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY-2));
+               lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY-1));
+               lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY-1));
+               lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY-1));
 	       }
            
            else
 	       {
+               //fekete lepesek
                lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY+1));
-           
                lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY+1));
                lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY+1));
+
+               //feher lepesek
+               lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY-1));
+               lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY-1));
+               lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY-1));
 	       }
            
            return lehetsegesLepesek;
-           //throw new NotImplementedException();
         }
 
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
