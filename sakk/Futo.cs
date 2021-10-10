@@ -21,18 +21,15 @@ namespace sakk
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
 
-<<<<<<< HEAD
             //jobbra fel
             for (int i = 1; i < 8; i++)
             {
-
                 if (i != helyX)
                 {
                     lepesek.Add(new Tuple<int, int>(helyX + i, helyY - i));
                 }
-                //nem kell a helyY ++?;
-                //8 ig megy a ciklus, nem indexel ki a pályáról? lónál?
             }
+            
             //balra le
             for (int i = 1; i < 8; i++)
             {
@@ -54,6 +51,7 @@ namespace sakk
                 }
 
             }
+            
             //balra fel
             for (int i = 1; i < 8; i++)
             {
@@ -64,22 +62,14 @@ namespace sakk
                 }
 
             }
-=======
->>>>>>> 1ddc46d8d5f3287dcae90e6cf279592cae344e9a
             return lepesek;
         }
 
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
-<<<<<<< HEAD
-            
-            return lepesek;
-            
-=======
 
             return lepesek;
->>>>>>> 1ddc46d8d5f3287dcae90e6cf279592cae344e9a
         }
 
         public override Babu Copy(Babu hova)
