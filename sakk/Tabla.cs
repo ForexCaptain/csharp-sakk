@@ -26,6 +26,7 @@ namespace sakk
         //ToDo: metódus megvalósítása
         public bool Lepes(int kezdoHelyX, int kezdoHelyY, int celHelyX, int celHelyY)
         {
+            //király sakkban van-e, túlindexelés
             if (tablaAllas[kezdoHelyX, kezdoHelyY].JoLepesek(tablaAllas).Contains(new Tuple<int, int>(celHelyX, celHelyY)))
             {
                 tablaAllas[kezdoHelyX, kezdoHelyY].HelyX = celHelyX;
