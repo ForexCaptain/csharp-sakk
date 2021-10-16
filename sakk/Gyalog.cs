@@ -30,7 +30,9 @@ namespace sakk
                     lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY+2));
                     lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY+1));
                     lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY+1));
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY+1));
+	                lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY+1));
+	               
+                    
 	            }
 
                 else
@@ -39,7 +41,8 @@ namespace sakk
                     //fekete lepesek
                     lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY+1));
                     lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY+1));
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY+1));         
+                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY+1));
+	                       
                
 	            }
 	        }
@@ -71,6 +74,8 @@ namespace sakk
 	            {
                     lehetsegesLepesek.Remove(lehetsegesLepesek[i]);
 	            }
+
+                
   			}
             
            
@@ -88,27 +93,33 @@ namespace sakk
 
             foreach (var item in lepesek)
 	        {
-                if (tablaAllas[item.Item1,item.Item2] == null )
+                
+
+                if (tablaAllas[item.Item1,item.Item2] != null && tablaAllas[item.Item1,item.Item2].Szin != Szin)
 	            {
                     joLepesek.Add(item);
 	            }
 
-                //else if (tablaAllas[item.Item1,item.Item2] != null && tablaAllas[item.Item1,item.Item2].Szin != tablaAllas[item.Item1,item.Item2].Szin)
-	            //{
-                //    joLepesek.Add(item);
-	            //}
+               else if (tablaAllas[item.Item1,item.Item2] == null && item.Item1==helyX)
+                    {
+                    joLepesek.Add(item);
+                }
+                
                 
 	        }
-            Console.WriteLine(joLepesek);
-            //return joLepesek;
-            
 
-            for (int i = 0; i < lepesek.Count; i++)
-			{
-                Console.WriteLine(lepesek[i]);
-			}
-            Console.ReadKey();
-            
+            ////lépések teszteléséhez listák kiírása
+            //for (int i = 0; i < lepesek.Count; i++)
+			//{
+            //    Console.WriteLine("Lehetséges lépések: " + lepesek[i]);
+			//}
+            //
+            //
+            //for (int i = 0; i < joLepesek.Count; i++)
+			//{
+            //    Console.WriteLine($"Jó lépések: " + joLepesek[i]);
+			//}
+            //Console.ReadKey();
             return lepesek;
             
         }
