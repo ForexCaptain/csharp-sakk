@@ -52,99 +52,74 @@ namespace sakk
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
-
+            bool[] rossziranyok = { false, false, false, false };
             foreach (var item in lepesek)
             {
-                bool joE = true;
-                //jobbrafelEll
-                if (helyY != item.Item2 && helyX < item.Item1 && helyY > item.Item2)
+                //jobb le
+                if (helyX < item.Item1 && helyY < item.Item2 && rossziranyok[0] == false)
                 {
-                    for (int i = Math.Min(helyY + 1, item.Item2); i < Math.Max(helyY - 1, item.Item2); i++)
+                    if (tablaAllas[item.Item1, item.Item2] == null)
                     {
-                        if (tablaAllas[helyX + 1, i] != null && joE)
+                        joLepesek.Add(item);
+                    }
+                    else
+                    {
+                        if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
                         {
-                            if (tablaAllas[helyX + 1, i].Szin == Szin)
-                            {
-                                joE = false;
-                            }
+                            joLepesek.Add(item);
                         }
+                        rossziranyok[0] = true;
                     }
                 }
-
-                //balraleEll
-                if (helyY != item.Item2 && helyX > item.Item1 && helyY < item.Item2)
+                //bal le
+                else if (helyX < item.Item1 && helyY > item.Item2 && rossziranyok[1] == false)
                 {
-                    for (int i = Math.Min(helyY + 1, item.Item2); i < Math.Max(helyX - 1, item.Item2); i++)
+                    if (tablaAllas[item.Item1, item.Item2] == null)
                     {
-                        if (tablaAllas[helyX - 1, i] != null && joE)
+                        joLepesek.Add(item);
+                    }
+                    else
+                    {
+                        if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
                         {
-                            if (tablaAllas[helyX - 1, i].Szin == Szin)
-                            {
-                                joE = false;
-                            }
+                            joLepesek.Add(item);
                         }
+                        rossziranyok[1] = true;
                     }
                 }
-                //balrafelEllXX
-                if (helyX != item.Item1 && helyX > item.Item1 && helyY > item.Item2)
+                //jobb fel
+                else if (helyX > item.Item1 && helyY < item.Item2 && rossziranyok[2] == false)
                 {
-                    for (int i = Math.Min(helyX + 1, item.Item1); i < Math.Max(helyX - 1, item.Item1); i++)
+                    if (tablaAllas[item.Item1, item.Item2] == null)
                     {
-                        if (tablaAllas[i - 1, helyY - 1] != null && joE)
+                        joLepesek.Add(item);
+                    }
+                    else
+                    {
+                        if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
                         {
-                            if (tablaAllas[i - 1, helyY - 1].Szin == Szin)
-                            {
-                                joE = false;
-                            }
+                            joLepesek.Add(item);
                         }
+                        rossziranyok[2] = true;
                     }
                 }
-                //jobbraleEll
-                if (helyX != item.Item1 && helyX > item.Item1 && helyY > item.Item2)
+                //bal fel
+                else if (helyX > item.Item1 && helyY > item.Item2 && rossziranyok[3] == false)
                 {
-                    for (int i = Math.Min(helyY + 1, item.Item2); i < Math.Max(helyY - 1, item.Item2); i++)
+                    if (tablaAllas[item.Item1, item.Item2] == null)
                     {
-                        if (tablaAllas[i + 1, helyY + 1] != null && joE)
-                        {
-                            if (tablaAllas[i, helyY + 1].Szin == Szin)
-                            {
-                                joE = false;
-                            }
-                        }
+                        joLepesek.Add(item);
                     }
-                }
-                if (joE)
-                {
-                    joLepesek.Add(item);
+                    else
+                    {
+                        if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
+                        {
+                            joLepesek.Add(item);
+                        }
+                        rossziranyok[3] = true;
+                    }
                 }
             }
-
-            //for (int i = 0; i < lepesek.Count; i++)
-            //{
-            //    if (lepesek[i].Item1 < 0 || lepesek[i].Item1 > 7 || lepesek[i].Item2 < 0 || lepesek[i].Item2 > 7)
-            //    {
-            //        lepesek.Remove(lepesek[i]);
-            //        i--;
-            //    }
-            //}
-
-            //foreach (var item in lepesek)
-            //{
-            //    bool joE = true;
-
-            //    for (int i = helyX; i < Math.Max(item.Item1, 7); i++)
-            //    {
-            //        if (tablaAllas[i, i] != null)
-            //        {
-            //            joE = false;
-            //        }
-            //    }
-
-            //    if (joE)
-            //    {
-            //        joLepesek.Add(item);
-            //    }
-            //}
             return joLepesek;
         }
 

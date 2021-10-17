@@ -70,7 +70,18 @@ namespace sakk
 
         public bool SakkbanVanE(Babu[,] tablaAllas)
         {
-            throw new NotImplementedException();
+            bool sakk = false;
+            foreach (var item in tablaAllas)
+            {
+                if (item != null)
+                {
+                    if (item.Szin != Szin)
+                    {
+                        if (item.JoLepesek(tablaAllas).Contains(new Tuple<int, int>(HelyX, HelyY))) sakk = true;
+                    }               
+                }
+            }
+            return sakk;
         }
 
         public override Babu Copy(Babu hova)
