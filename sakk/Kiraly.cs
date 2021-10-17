@@ -32,12 +32,31 @@ namespace sakk
 
             return lepesek;
         }
-
+        //talan kész
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
+            List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
+            foreach (var item in lepesek)
+            {
+                bool joE = true;
+                //index a tömb határain kívülre mutat
+                if (tablaAllas[item.Item1,item.Item2] != null)
+                {
+                    if (tablaAllas[item.Item1, item.Item2].Szin == Szin)
+                    {
+                        joE = false;
+                    }
+                }
+                if (joE)
+                {
+                    joLepesek.Add(item);
+                }
+                
+            }
 
-            return lepesek;
+
+            return joLepesek;
         }
 
         public bool SakkbanVanE()
