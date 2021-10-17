@@ -68,8 +68,75 @@ namespace sakk
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
+            List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
 
-            return lepesek;
+            foreach (var item in lepesek)
+            {
+                bool joE = true;
+                //jobbrafelEll
+                if (helyY != item.Item2 && helyX < item.Item1 && helyY > item.Item2)
+                {
+                    for (int i = Math.Min(helyY + 1, item.Item2); i < Math.Max(helyY - 1, item.Item2); i++)
+                    {
+                        if (tablaAllas[helyX ++, i] != null && joE)
+                        {
+                            if (tablaAllas[helyX ++, i].Szin == Szin)
+                            {
+                                joE = false;
+                            }
+                        }
+                    }
+                }
+
+                //balraleEll
+                if (helyY != item.Item2 && helyX > item.Item1 && helyY < item.Item2)
+                {
+                    for (int i = Math.Min(helyY + 1, item.Item2); i < Math.Max(helyX - 1, item.Item2); i++)
+                    {
+                        if (tablaAllas[helyX --, i ] != null && joE)
+                        {
+                            if (tablaAllas[helyX --, i].Szin == Szin)
+                            {
+                                joE = false;
+                            }
+                        }
+                    }
+                }
+                //balrafelEllXX
+                if (helyX != item.Item1 && helyX > item.Item1 && helyY > item.Item2)
+                {
+                    for (int i = Math.Min(helyX + 1, item.Item1); i < Math.Max(helyX - 1, item.Item1); i++)
+                    {
+                        if (tablaAllas[i--, helyY--] != null && joE)
+                        {
+                            if (tablaAllas[i--, helyY--].Szin == Szin)
+                            {
+                                joE = false;
+                            }
+                        }
+                    }
+                }
+                //jobbraleEll
+                if (helyX != item.Item1 && helyX > item.Item1 && helyY > item.Item2)
+                {
+                    for (int i = Math.Min(helyY + 1, item.Item2); i < Math.Max(helyY - 1, item.Item2); i++)
+                    {
+                        if (tablaAllas[i++, helyY++] != null && joE)
+                        {
+                            if (tablaAllas[i, helyY++].Szin == Szin)
+                            {
+                                joE = false;
+                            }
+                        }
+                    }
+                }
+                if (joE)
+                {
+                    joLepesek.Add(item);
+                }
+            }
+
+            return joLepesek;
         }
 
         public override Babu Copy(Babu hova)
