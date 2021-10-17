@@ -95,15 +95,11 @@ namespace sakk
 	        {
                 
 
-                if (tablaAllas[item.Item1,item.Item2] != null && tablaAllas[item.Item1,item.Item2].Szin != Szin)
+                if (tablaAllas[item.Item1,item.Item2] != null && item.Item1!=helyX && tablaAllas[item.Item1,item.Item2].Szin != Szin)
 	            {
                     joLepesek.Add(item);
 	            }
-                //
-                //else if (tablaAllas[item.Item1,item.Item2] != null && tablaAllas[item.Item1,item.Item2].Szin != Szin && item.Item1 == helyX && item.Item2 != helyY-1)
-	            //{
-                //    joLepesek.Add(item);
-	            //}
+                
 
                else if (tablaAllas[item.Item1,item.Item2] == null && item.Item1==helyX)
                     {
@@ -114,18 +110,18 @@ namespace sakk
 	        }
 
             //lépések teszteléséhez listák kiírása
-            for (int i = 0; i < lepesek.Count; i++)
-			{
-                Console.WriteLine("Lehetséges lépések: " + lepesek[i]);
-			}
-            
-            
-            for (int i = 0; i < joLepesek.Count; i++)
-			{
-                Console.WriteLine($"Jó lépések: " + joLepesek[i]);
-			}
-            Console.ReadKey();
-            return lepesek;
+            //for (int i = 0; i < lepesek.Count; i++)
+			//{
+            //    Console.WriteLine("Lehetséges lépések: " + lepesek[i]);
+			//}
+            //
+            //
+            //for (int i = 0; i < joLepesek.Count; i++)
+			//{
+            //    Console.WriteLine($"Jó lépések: " + joLepesek[i]);
+			//}
+            //Console.ReadKey();
+            return joLepesek;
             
         }
 
