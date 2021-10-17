@@ -35,8 +35,24 @@ namespace sakk
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
+            List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
+            foreach (var item in lepesek)
+            {
+                bool joE = true;
+                if (tablaAllas[item.Item1, item.Item2] != null)
+                {
+                    if (tablaAllas[item.Item1, item.Item2].Szin == Szin)
+                    {
+                        joE = false;
+                    }
+                }
+                if (joE)
+                {
+                    joLepesek.Add(item);
+                }
+            }
 
-            return lepesek;
+            return joLepesek;
         }
 
         public override Babu Copy(Babu hova)
