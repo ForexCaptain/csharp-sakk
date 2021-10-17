@@ -21,46 +21,19 @@ namespace sakk
         {
             List<Tuple<int, int>> lepesek = new List<Tuple<int, int>>();
 
-            //jobbra fel
             for (int i = 1; i < 8; i++)
             {
-                if (i != helyX)
-                {
-                    lepesek.Add(new Tuple<int, int>(helyX + i, helyY - i));
-                }
-            }
-            
-            //balra le
-            for (int i = 1; i < 8; i++)
-            {
+                //jobbra fel
+                lepesek.Add(new Tuple<int, int>(helyX + i, helyY - i));
 
-                if (i != helyY)
-                {
-                    lepesek.Add(new Tuple<int, int>(helyX - i, helyY + i));
-                }
+                //balra le
+                lepesek.Add(new Tuple<int, int>(helyX - i, helyY + i));
 
-            }
+                //jobbra le
+                lepesek.Add(new Tuple<int, int>(helyX + i, helyY + i));
 
-            //jobbra le
-            for (int i = 1; i < 8; i++)
-            {
-
-                if (i != helyX)
-                {
-                    lepesek.Add(new Tuple<int, int>(helyX + i, helyY + i));
-                }
-
-            }
-            
-            //balra fel
-            for (int i = 1; i < 8; i++)
-            {
-
-                if (i != helyY)
-                {
-                    lepesek.Add(new Tuple<int, int>(helyX - i, helyY - i));
-                }
-
+                //balra fel
+                lepesek.Add(new Tuple<int, int>(helyX - i, helyY - i));
             }
             return lepesek;
         }

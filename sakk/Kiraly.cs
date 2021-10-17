@@ -59,7 +59,7 @@ namespace sakk
             return joLepesek;
         }
 
-        public bool SakkbanVanE()
+        public bool SakkbanVanE(Babu[,] tablaAllas)
         {
             throw new NotImplementedException();
         }

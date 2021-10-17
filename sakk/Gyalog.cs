@@ -90,6 +90,8 @@ namespace sakk
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
 
 
+            try
+            {
 
             foreach (var item in lepesek)
 	        {
@@ -109,17 +111,23 @@ namespace sakk
                 
 	        }
 
+            }
+            catch (Exception)
+            {
+
+            }
+
             //lépések teszteléséhez listák kiírása
             //for (int i = 0; i < lepesek.Count; i++)
-			//{
+            //{
             //    Console.WriteLine("Lehetséges lépések: " + lepesek[i]);
-			//}
+            //}
             //
             //
             //for (int i = 0; i < joLepesek.Count; i++)
-			//{
+            //{
             //    Console.WriteLine($"Jó lépések: " + joLepesek[i]);
-			//}
+            //}
             //Console.ReadKey();
             return joLepesek;
             
