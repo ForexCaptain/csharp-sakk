@@ -30,6 +30,15 @@ namespace sakk
             lepesek.Add(new Tuple<int, int>(helyX - 1, helyY));
             lepesek.Add(new Tuple<int, int>(helyX - 1, helyY - 1));
 
+            for (int i = 0; i < lepesek.Count; i++)
+            {
+                if (lepesek[i].Item1 < 0 || lepesek[i].Item1 > 7 || lepesek[i].Item2 < 0 || lepesek[i].Item2 > 7)
+                {
+                    lepesek.Remove(lepesek[i]);
+                    i--;
+                }
+            }
+
             return lepesek;
         }
         //talan kész

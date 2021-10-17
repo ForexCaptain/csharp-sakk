@@ -35,6 +35,16 @@ namespace sakk
                 //balra fel
                 lepesek.Add(new Tuple<int, int>(helyX - i, helyY - i));
             }
+
+            for (int i = 0; i < lepesek.Count; i++)
+            {
+                if (lepesek[i].Item1 < 0 || lepesek[i].Item1 > 7 || lepesek[i].Item2 < 0 || lepesek[i].Item2 > 7)
+                {
+                    lepesek.Remove(lepesek[i]);
+                    i--;
+                }
+            }
+
             return lepesek;
         }
 
@@ -51,9 +61,9 @@ namespace sakk
                 {
                     for (int i = Math.Min(helyY + 1, item.Item2); i < Math.Max(helyY - 1, item.Item2); i++)
                     {
-                        if (tablaAllas[helyX ++, i] != null && joE)
+                        if (tablaAllas[helyX + 1, i] != null && joE)
                         {
-                            if (tablaAllas[helyX ++, i].Szin == Szin)
+                            if (tablaAllas[helyX + 1, i].Szin == Szin)
                             {
                                 joE = false;
                             }
@@ -66,9 +76,9 @@ namespace sakk
                 {
                     for (int i = Math.Min(helyY + 1, item.Item2); i < Math.Max(helyX - 1, item.Item2); i++)
                     {
-                        if (tablaAllas[helyX --, i ] != null && joE)
+                        if (tablaAllas[helyX - 1, i] != null && joE)
                         {
-                            if (tablaAllas[helyX --, i].Szin == Szin)
+                            if (tablaAllas[helyX - 1, i].Szin == Szin)
                             {
                                 joE = false;
                             }
@@ -80,9 +90,9 @@ namespace sakk
                 {
                     for (int i = Math.Min(helyX + 1, item.Item1); i < Math.Max(helyX - 1, item.Item1); i++)
                     {
-                        if (tablaAllas[i--, helyY--] != null && joE)
+                        if (tablaAllas[i - 1, helyY - 1] != null && joE)
                         {
-                            if (tablaAllas[i--, helyY--].Szin == Szin)
+                            if (tablaAllas[i - 1, helyY - 1].Szin == Szin)
                             {
                                 joE = false;
                             }
@@ -94,9 +104,9 @@ namespace sakk
                 {
                     for (int i = Math.Min(helyY + 1, item.Item2); i < Math.Max(helyY - 1, item.Item2); i++)
                     {
-                        if (tablaAllas[i++, helyY++] != null && joE)
+                        if (tablaAllas[i + 1, helyY + 1] != null && joE)
                         {
-                            if (tablaAllas[i, helyY++].Szin == Szin)
+                            if (tablaAllas[i, helyY + 1].Szin == Szin)
                             {
                                 joE = false;
                             }
@@ -109,6 +119,32 @@ namespace sakk
                 }
             }
 
+            //for (int i = 0; i < lepesek.Count; i++)
+            //{
+            //    if (lepesek[i].Item1 < 0 || lepesek[i].Item1 > 7 || lepesek[i].Item2 < 0 || lepesek[i].Item2 > 7)
+            //    {
+            //        lepesek.Remove(lepesek[i]);
+            //        i--;
+            //    }
+            //}
+
+            //foreach (var item in lepesek)
+            //{
+            //    bool joE = true;
+
+            //    for (int i = helyX; i < Math.Max(item.Item1, 7); i++)
+            //    {
+            //        if (tablaAllas[i, i] != null)
+            //        {
+            //            joE = false;
+            //        }
+            //    }
+
+            //    if (joE)
+            //    {
+            //        joLepesek.Add(item);
+            //    }
+            //}
             return joLepesek;
         }
 

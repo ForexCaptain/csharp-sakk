@@ -68,19 +68,17 @@ namespace sakk
 
 	            }
 	        }
-            for (int i = 0; i < lehetsegesLepesek.Count; i++)
-			{
-                if (lehetsegesLepesek[i].Item1<0 || lehetsegesLepesek[i].Item2>8)
-	            {
-                    lehetsegesLepesek.Remove(lehetsegesLepesek[i]);
-	            }
 
-                
-  			}
-            
-           
-           
-           return lehetsegesLepesek;
+            for (int i = 0; i < lehetsegesLepesek.Count; i++)
+            {
+                if (lehetsegesLepesek[i].Item1 < 0 || lehetsegesLepesek[i].Item1 > 7 || lehetsegesLepesek[i].Item2 < 0 || lehetsegesLepesek[i].Item2 > 7)
+                {
+                    lehetsegesLepesek.Remove(lehetsegesLepesek[i]);
+                    i--;
+                }
+            }
+
+            return lehetsegesLepesek;
            
         }
 
@@ -89,48 +87,19 @@ namespace sakk
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
 
-
-            try
-            {
-
             foreach (var item in lepesek)
-	        {
-                
-
-                if (tablaAllas[item.Item1,item.Item2] != null && item.Item1!=helyX && tablaAllas[item.Item1,item.Item2].Szin != Szin)
-	            {
-                    joLepesek.Add(item);
-	            }
-                
-
-               else if (tablaAllas[item.Item1,item.Item2] == null && item.Item1==helyX)
-                    {
+            {
+                if (tablaAllas[item.Item1, item.Item2] != null && item.Item1 != helyX && tablaAllas[item.Item1, item.Item2].Szin != Szin)
+                {
                     joLepesek.Add(item);
                 }
-                
-                
-	        }
-
-            }
-            catch (Exception)
-            {
-
+                else if (tablaAllas[item.Item1, item.Item2] == null && item.Item1 == helyX)
+                {
+                    joLepesek.Add(item);
+                }
             }
 
-            //lépések teszteléséhez listák kiírása
-            //for (int i = 0; i < lepesek.Count; i++)
-            //{
-            //    Console.WriteLine("Lehetséges lépések: " + lepesek[i]);
-            //}
-            //
-            //
-            //for (int i = 0; i < joLepesek.Count; i++)
-            //{
-            //    Console.WriteLine($"Jó lépések: " + joLepesek[i]);
-            //}
-            //Console.ReadKey();
             return joLepesek;
-            
         }
 
         public override Babu Copy(Babu hova)

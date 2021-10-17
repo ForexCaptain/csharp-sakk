@@ -49,7 +49,7 @@ namespace sakk
                 {
                     for (int i = Math.Min(helyY + 1, item.Item2); i <= Math.Max(helyY - 1, item.Item2); i++)
                     {
-                        if (tablaAllas[helyX, i] != null && joE)
+                        if (tablaAllas[helyX, i] != null)
                             joE = false;
                     }
                 }
@@ -57,7 +57,7 @@ namespace sakk
                 {
                     for (int i = Math.Min(helyX + 1, item.Item1); i <= Math.Max(helyX - 1, item.Item1); i++)
                     {
-                        if (tablaAllas[i, helyY] != null && joE)
+                        if (tablaAllas[i, helyY] != null)
                             joE = false;
                     }
                 }
