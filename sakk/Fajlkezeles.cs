@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace sakk
@@ -50,7 +47,6 @@ namespace sakk
 
         public static void Mentes(string fajlnev, Babu[,] allas)
         {
-
             StreamWriter iras = new StreamWriter(fajlnev, false, Encoding.UTF8);
 
             for (int i = 0; i < 8; i++)

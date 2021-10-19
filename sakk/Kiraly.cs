@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sakk
 {
@@ -20,11 +17,11 @@ namespace sakk
         {
             List<Tuple<int, int>> lepesek = new List<Tuple<int, int>>();
 
-            for (int i = -1; i < 1; i++)
+            for (int i = -1; i <= 1; i++)
             {
                 if (helyX + 1 <= 7 && helyY + i >= 0 && helyY + i <= 7)
                     lepesek.Add(new Tuple<int, int>(helyX + 1, helyY + i));
-                if (helyX - 1 <= 7 && helyY + i >= 0 && helyY + i <= 7)
+                if (helyX - 1 >= 0 && helyY + i >= 0 && helyY + i <= 7)
                     lepesek.Add(new Tuple<int, int>(helyX - 1, helyY + i));
                 if (i != 0 && helyY + i >= 0 && helyY + i <= 7)
                     lepesek.Add(new Tuple<int, int>(helyX, helyY + i));
@@ -41,9 +38,7 @@ namespace sakk
             foreach (var item in lepesek)
             {
                 if (tablaAllas[item.Item1, item.Item2] == null || tablaAllas[item.Item1, item.Item2].Szin != Szin)
-                {
                     joLepesek.Add(item);
-                }
             }
 
             return joLepesek;
@@ -54,12 +49,10 @@ namespace sakk
             bool sakk = false;
             foreach (var item in tablaAllas)
             {
-                if (item != null)
+                if (item != null && item?.Szin != Szin)
                 {
-                    if (item.Szin != Szin)
-                    {
-                        if (item.JoLepesek(tablaAllas).Contains(new Tuple<int, int>(HelyX, HelyY))) sakk = true;
-                    }
+                    if (item.JoLepesek(tablaAllas).Contains(new Tuple<int, int>(HelyX, HelyY)))
+                        sakk = true;
                 }
             }
             return sakk;

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sakk
 {
@@ -24,9 +21,7 @@ namespace sakk
             if (Szin == "fekete")
             {
                 if (helyY == 1)
-                {
                     lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY + 2));
-                }
                 lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY + 1));
                 lehetsegesLepesek.Add(new Tuple<int, int>(helyX - 1, helyY + 1));
                 lehetsegesLepesek.Add(new Tuple<int, int>(helyX + 1, helyY + 1));
@@ -34,10 +29,8 @@ namespace sakk
             //fehér lépések
             else
             {
-                if (helyY == 6)
-                {                  
+                if (helyY == 6)              
                     lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY - 2));
-                }
                 lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY - 1));
                 lehetsegesLepesek.Add(new Tuple<int, int>(helyX + 1, helyY - 1));
                 lehetsegesLepesek.Add(new Tuple<int, int>(helyX - 1, helyY - 1));
@@ -64,13 +57,9 @@ namespace sakk
             foreach (var item in lepesek)
             {
                 if (tablaAllas[item.Item1, item.Item2] != null && item.Item1 != helyX && tablaAllas[item.Item1, item.Item2].Szin != Szin)
-                {
                     joLepesek.Add(item);
-                }
                 else if (tablaAllas[item.Item1, item.Item2] == null && item.Item1 == helyX)
-                {
                     joLepesek.Add(item);
-                }
             }
 
             return joLepesek;

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sakk
 {
@@ -49,9 +46,7 @@ namespace sakk
             foreach (var item in lepesek)
             {
                 if (tablaAllas[item.Item1, item.Item2] == null || tablaAllas[item.Item1, item.Item2].Szin != Szin)
-                {
                     joLepesek.Add(item);
-                }
             }
 
             return joLepesek;

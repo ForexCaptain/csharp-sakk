@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sakk
 {
@@ -25,15 +22,12 @@ namespace sakk
                 //jobbra fel
                 if(helyX + i <= 7 && helyY - i >= 0)
                     lepesek.Add(new Tuple<int, int>(helyX + i, helyY - i));
-
                 //balra le
                 if (helyX - i >= 0 && helyY + i <= 7)
                     lepesek.Add(new Tuple<int, int>(helyX - i, helyY + i));
-
                 //jobbra le
                 if (helyX + i <= 7 && helyY + i <= 7)
                     lepesek.Add(new Tuple<int, int>(helyX + i, helyY + i));
-
                 //balra fel
                 if (helyX - i >= 0 && helyY - i >= 0)
                     lepesek.Add(new Tuple<int, int>(helyX - i, helyY - i));
@@ -48,28 +42,20 @@ namespace sakk
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
 
             bool[] rossziranyok = { false, false, false, false };
-            foreach (Tuple<int, int> item in lepesek)
+            foreach (var item in lepesek)
             {
                 //jobb le
-                if (helyX < item.Item1 && helyY < item.Item2 && rossziranyok[0] == false)
-                {
+                if (helyX < item.Item1 && helyY < item.Item2 && !rossziranyok[0])
                     rossziranyok[0] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
-                }
                 //bal le
-                else if (helyX < item.Item1 && helyY > item.Item2 && rossziranyok[1] == false)
-                {
+                else if (helyX < item.Item1 && helyY > item.Item2 && !rossziranyok[1])
                     rossziranyok[1] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
-                }
                 //jobb fel
-                else if (helyX > item.Item1 && helyY < item.Item2 && rossziranyok[2] == false)
-                {
+                else if (helyX > item.Item1 && helyY < item.Item2 && !rossziranyok[2])
                     rossziranyok[2] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
-                }
                 //bal fel
-                else if (helyX > item.Item1 && helyY > item.Item2 && rossziranyok[3] == false)
-                {
+                else if (helyX > item.Item1 && helyY > item.Item2 && !rossziranyok[3])
                     rossziranyok[3] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
-                }
             }
 
             return joLepesek;
@@ -85,9 +71,7 @@ namespace sakk
             else
             {
                 if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
-                {
                     joLepesek.Add(item);
-                }
                 return true;
             }
         }

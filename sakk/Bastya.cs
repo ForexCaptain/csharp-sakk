@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace sakk
 {
@@ -20,22 +17,20 @@ namespace sakk
         {
             List<Tuple<int, int>> lepesek = new List<Tuple<int, int>>();
 
-            //egyenes
-            for (int i = 0; i < 8; i++)
+            for (int i = 1; i < 8; i++)
             {
-                //vízszintes
-                if (i != helyX)
-                {
-                    lepesek.Add(new Tuple<int, int>(i, helyY));
-                }
-            }
-            for (int i = 0; i < 8; i++)
-            {
-                //függőleges
-                if (i != helyY)
-                {
-                    lepesek.Add(new Tuple<int, int>(helyX, i));
-                }
+                //jobbra
+                if (helyX + i <= 7)
+                    lepesek.Add(new Tuple<int, int>(helyX + i, helyY));
+                //balra
+                if (helyX - i >= 0)
+                    lepesek.Add(new Tuple<int, int>(helyX - i, helyY));
+                //le
+                if (helyY + i <= 7)
+                    lepesek.Add(new Tuple<int, int>(helyX, helyY + i));
+                //fel
+                if (helyY - i >= 0)
+                    lepesek.Add(new Tuple<int, int>(helyX, helyY - i));
             }
 
             return lepesek;
@@ -45,36 +40,33 @@ namespace sakk
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
-
+            
+            bool[] rossziranyok = { false, false};
             foreach (var item in lepesek)
             {
-                bool joE = true;
-                if (helyY != item.Item2)
-                {
-                    for (int i = Math.Min(helyY + 1, item.Item2); i <= Math.Max(helyY - 1, item.Item2); i++)
-                    {
-                        //nem üres mező és azonos szín áll ott
-                        if (tablaAllas[helyX, i] != null && tablaAllas[helyX, i].Szin == Szin)
-                            joE = false;
-                    }
-                }
-                else
-                {
-                    for (int i = Math.Min(helyX + 1, item.Item1); i <= Math.Max(helyX - 1, item.Item1); i++)
-                    {
-                        //nem üres mező és azonos szín áll ott
-                        if (tablaAllas[i, helyY] != null && tablaAllas[i, helyY].Szin == Szin)
-                            joE = false;
-                    }
-                }
-
-                if (joE)
-                {
-                    joLepesek.Add(item);
-                }
+                if (helyX != item.Item1 && !rossziranyok[0])
+                    rossziranyok[0] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+                else if(helyY != item.Item2 && !rossziranyok[1])
+                    rossziranyok[1] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
             }
 
             return joLepesek;
+        }
+
+        //átadjuk az irányokat, ha abban az irányban már nem tud tovább lépni, true-t ad vissza, egyébként false-ot
+        private bool RosszEAzIrany(Babu[,] tablaAllas, Tuple<int, int> item, ref List<Tuple<int, int>> joLepesek)
+        {
+            if (tablaAllas[item.Item1, item.Item2] == null)
+            {
+                joLepesek.Add(item);
+                return false;
+            }
+            else
+            {
+                if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
+                    joLepesek.Add(item);
+                return true;
+            }
         }
 
         public override Babu Copy(Babu hova)
