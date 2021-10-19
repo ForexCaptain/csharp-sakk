@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace sakk
 {
     class Bastya : Babu
-    {   
-        //ToDo: metódusok megvalósítása
+    {
         public Bastya(int helyX, int helyY, string szin) : base(helyX, helyY, szin)
         {
             Tipus = BabuTipus.Bastya;
@@ -20,8 +19,11 @@ namespace sakk
         public override List<Tuple<int, int>> LehetsegesLepesek()
         {
             List<Tuple<int, int>> lepesek = new List<Tuple<int, int>>();
+
+            //egyenes
             for (int i = 0; i < 8; i++)
             {
+                //vízszintes
                 if (i != helyX)
                 {
                     lepesek.Add(new Tuple<int, int>(i, helyY));
@@ -29,19 +31,21 @@ namespace sakk
             }
             for (int i = 0; i < 8; i++)
             {
+                //függőleges
                 if (i != helyY)
                 {
                     lepesek.Add(new Tuple<int, int>(helyX, i));
                 }
             }
+
             return lepesek;
         }
 
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
-            //ütés nincs megírva
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
+
             foreach (var item in lepesek)
             {
                 bool joE = true;
@@ -49,7 +53,8 @@ namespace sakk
                 {
                     for (int i = Math.Min(helyY + 1, item.Item2); i <= Math.Max(helyY - 1, item.Item2); i++)
                     {
-                        if (tablaAllas[helyX, i] != null)
+                        //nem üres mező és azonos szín áll ott
+                        if (tablaAllas[helyX, i] != null && tablaAllas[helyX, i].Szin == Szin)
                             joE = false;
                     }
                 }
@@ -57,7 +62,8 @@ namespace sakk
                 {
                     for (int i = Math.Min(helyX + 1, item.Item1); i <= Math.Max(helyX - 1, item.Item1); i++)
                     {
-                        if (tablaAllas[i, helyY] != null)
+                        //nem üres mező és azonos szín áll ott
+                        if (tablaAllas[i, helyY] != null && tablaAllas[i, helyY].Szin == Szin)
                             joE = false;
                     }
                 }
@@ -67,6 +73,7 @@ namespace sakk
                     joLepesek.Add(item);
                 }
             }
+
             return joLepesek;
         }
 

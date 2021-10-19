@@ -8,7 +8,6 @@ namespace sakk
 {
     class Vezer : Babu
     {
-        //ToDo: metódusok megvalósítása
         public Vezer(int helyX, int helyY, string szin) : base(helyX, helyY, szin)
         {
             Tipus = BabuTipus.Vezer;
@@ -20,9 +19,11 @@ namespace sakk
         public override List<Tuple<int, int>> LehetsegesLepesek()
         {
             List<Tuple<int, int>> lepesek = new List<Tuple<int, int>>();
+
             //egyenes
             for (int i = 0; i < 8; i++)
             {
+                //vízszintes
                 if (i != helyX)
                 {
                     lepesek.Add(new Tuple<int, int>(i, helyY));
@@ -30,6 +31,7 @@ namespace sakk
             }
             for (int i = 0; i < 8; i++)
             {
+                //függőleges
                 if (i != helyY)
                 {
                     lepesek.Add(new Tuple<int, int>(helyX, i));
@@ -40,24 +42,31 @@ namespace sakk
             for (int i = 1; i < 8; i++)
             {
                 //jobbra fel
-                lepesek.Add(new Tuple<int, int>(helyX + i, helyY - i));
+                if (helyX + i <= 7 && helyY - i >= 0)
+                    lepesek.Add(new Tuple<int, int>(helyX + i, helyY - i));
 
                 //balra le
-                lepesek.Add(new Tuple<int, int>(helyX - i, helyY + i));
+                if (helyX - i >= 0 && helyY + i <= 7)
+                    lepesek.Add(new Tuple<int, int>(helyX - i, helyY + i));
 
                 //jobbra le
-                lepesek.Add(new Tuple<int, int>(helyX + i, helyY + i));
+                if (helyX + i <= 7 && helyY + i <= 7)
+                    lepesek.Add(new Tuple<int, int>(helyX + i, helyY + i));
 
                 //balra fel
-                lepesek.Add(new Tuple<int, int>(helyX - i, helyY - i));
+                if (helyX - i >= 0 && helyY - i >= 0)
+                    lepesek.Add(new Tuple<int, int>(helyX - i, helyY - i));
             }
+
             return lepesek;
         }
 
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
-  
+
+            //megvalósítás ide
+
             return lepesek;
         }
 

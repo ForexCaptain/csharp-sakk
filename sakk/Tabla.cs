@@ -23,10 +23,9 @@ namespace sakk
             Fajlkezeles.Betoltes(fajlnev, ref tablaAllas);
         }
 
-        //ToDo: metódus megvalósítása
         public bool Lepes(int kezdoHelyX, int kezdoHelyY, int celHelyX, int celHelyY)
         {
-            //király sakkban van-e, túlindexelés
+            //király sakkban van-e, túlindexelés megoldása még szükséges
             if (tablaAllas[kezdoHelyX, kezdoHelyY].JoLepesek(tablaAllas).Contains(new Tuple<int, int>(celHelyX, celHelyY)))
             {
                 tablaAllas[kezdoHelyX, kezdoHelyY].HelyX = celHelyX;
@@ -43,13 +42,15 @@ namespace sakk
 
         public void TablaKirajzolas()
         {
+            //tennivaló: kód rendbeszedése
             Console.BackgroundColor = ConsoleColor.Red;
             char[] betuk = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
-            for (int j = 0; j < 18; j++)
+            int kiirandoSorokSzama = 18;
+            for (int j = 0; j < kiirandoSorokSzama; j++)
             {
                 for (int i = 0; i < 8; i++)
                 {
-                    if (j == 17)
+                    if (j == kiirandoSorokSzama - 1)
                         Console.Write($"  {betuk[i]} ");
                     else
                     {
@@ -72,20 +73,20 @@ namespace sakk
                                 }
                             }
                             else
-                            {  
+                            {
                                 Console.Write("|   ");
                             }
                         }
                     }
                 }
-                if (j == 17)
+                if (j == kiirandoSorokSzama - 1)
                     Console.Write("    \n");
                 else
                 {
                     if (j % 2 == 0)
                         Console.Write("+   \n");
                     else
-                        Console.Write($"| {(18 - j) / 2} \n");
+                        Console.Write($"| {(kiirandoSorokSzama - j) / 2} \n");
                 }
             }
             Console.BackgroundColor = ConsoleColor.Black;

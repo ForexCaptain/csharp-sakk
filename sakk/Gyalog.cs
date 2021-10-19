@@ -8,7 +8,6 @@ namespace sakk
 {
     class Gyalog : Babu
     {
-        //ToDo: metódusok megvalósítása
         public Gyalog(int helyX, int helyY, string szin) : base(helyX, helyY, szin)
         {
             Tipus = BabuTipus.Gyalog;
@@ -19,56 +18,31 @@ namespace sakk
 
         public override List<Tuple<int, int>> LehetsegesLepesek()
         {
-           List<Tuple<int,int>> lehetsegesLepesek = new List<Tuple<int, int>>();
-                       
-            if (Szin=="fekete")
-	        {
+            List<Tuple<int, int>> lehetsegesLepesek = new List<Tuple<int, int>>();
+
+            //fekete lépések
+            if (Szin == "fekete")
+            {
                 if (helyY == 1)
-	            {
-                    //fekete lepesek
-               
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY+2));
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY+1));
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY+1));
-	                lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY+1));
-	               
-                    
-	            }
-
-                else
-	            {
-                
-                    //fekete lepesek
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY+1));
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY+1));
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY+1));
-	                       
-               
-	            }
-	        }
-
+                {
+                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY + 2));
+                }
+                lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY + 1));
+                lehetsegesLepesek.Add(new Tuple<int, int>(helyX - 1, helyY + 1));
+                lehetsegesLepesek.Add(new Tuple<int, int>(helyX + 1, helyY + 1));
+            }
+            //fehér lépések
             else
-	        {
+            {
                 if (helyY == 6)
-	            {
-                    //feher lepesek
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY-2));
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY-1));
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY-1));
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY-1));
-	            }
-
-                else
-	            {
-                
-                    //feher lepesek
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX,helyY-1));
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX+1,helyY-1));
-                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX-1,helyY-1));
-
-	            }
-	        }
-
+                {                  
+                    lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY - 2));
+                }
+                lehetsegesLepesek.Add(new Tuple<int, int>(helyX, helyY - 1));
+                lehetsegesLepesek.Add(new Tuple<int, int>(helyX + 1, helyY - 1));
+                lehetsegesLepesek.Add(new Tuple<int, int>(helyX - 1, helyY - 1));
+            }
+            //táblán kívüli lépsek törlése
             for (int i = 0; i < lehetsegesLepesek.Count; i++)
             {
                 if (lehetsegesLepesek[i].Item1 < 0 || lehetsegesLepesek[i].Item1 > 7 || lehetsegesLepesek[i].Item2 < 0 || lehetsegesLepesek[i].Item2 > 7)
@@ -79,7 +53,7 @@ namespace sakk
             }
 
             return lehetsegesLepesek;
-           
+
         }
 
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)

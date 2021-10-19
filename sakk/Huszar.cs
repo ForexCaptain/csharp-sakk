@@ -8,7 +8,6 @@ namespace sakk
 {
     class Huszar : Babu
     {
-        //ToDo: metódusok megvalósítása
         public Huszar(int helyX, int helyY, string szin) : base(helyX, helyY, szin)
         {
             Tipus = BabuTipus.Huszar;
@@ -30,6 +29,7 @@ namespace sakk
             lepesek.Add(new Tuple<int, int>(helyX - 1, helyY - 2));
             lepesek.Add(new Tuple<int, int>(helyX - 1, helyY + 2));
 
+            //táblán kívüli lépsek törlése
             for (int i = 0; i < lepesek.Count; i++)
             {
                 if (lepesek[i].Item1 < 0 || lepesek[i].Item1 > 7 || lepesek[i].Item2 < 0 || lepesek[i].Item2 > 7)
@@ -45,17 +45,10 @@ namespace sakk
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
+
             foreach (var item in lepesek)
             {
-                bool joE = true;
-                if (tablaAllas[item.Item1, item.Item2] != null)
-                {
-                    if (tablaAllas[item.Item1, item.Item2].Szin == Szin)
-                    {
-                        joE = false;
-                    }
-                }
-                if (joE)
+                if (tablaAllas[item.Item1, item.Item2] == null || tablaAllas[item.Item1, item.Item2].Szin != Szin)
                 {
                     joLepesek.Add(item);
                 }

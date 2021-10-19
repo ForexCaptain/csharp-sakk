@@ -8,7 +8,6 @@ namespace sakk
 {
     class Futo : Babu
     {
-        //ToDo: metódusok megvalósítása
         public Futo(int helyX, int helyY, string szin) : base(helyX, helyY, szin)
         {
             Tipus = BabuTipus.Futo;
@@ -24,25 +23,20 @@ namespace sakk
             for (int i = 1; i < 8; i++)
             {
                 //jobbra fel
-                lepesek.Add(new Tuple<int, int>(helyX + i, helyY - i));
+                if(helyX + i <= 7 && helyY - i >= 0)
+                    lepesek.Add(new Tuple<int, int>(helyX + i, helyY - i));
 
                 //balra le
-                lepesek.Add(new Tuple<int, int>(helyX - i, helyY + i));
+                if (helyX - i >= 0 && helyY + i <= 7)
+                    lepesek.Add(new Tuple<int, int>(helyX - i, helyY + i));
 
                 //jobbra le
-                lepesek.Add(new Tuple<int, int>(helyX + i, helyY + i));
+                if (helyX + i <= 7 && helyY + i <= 7)
+                    lepesek.Add(new Tuple<int, int>(helyX + i, helyY + i));
 
                 //balra fel
-                lepesek.Add(new Tuple<int, int>(helyX - i, helyY - i));
-            }
-
-            for (int i = 0; i < lepesek.Count; i++)
-            {
-                if (lepesek[i].Item1 < 0 || lepesek[i].Item1 > 7 || lepesek[i].Item2 < 0 || lepesek[i].Item2 > 7)
-                {
-                    lepesek.Remove(lepesek[i]);
-                    i--;
-                }
+                if (helyX - i >= 0 && helyY - i >= 0)
+                    lepesek.Add(new Tuple<int, int>(helyX - i, helyY - i));
             }
 
             return lepesek;
@@ -52,75 +46,50 @@ namespace sakk
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
+
             bool[] rossziranyok = { false, false, false, false };
-            foreach (var item in lepesek)
+            foreach (Tuple<int, int> item in lepesek)
             {
                 //jobb le
                 if (helyX < item.Item1 && helyY < item.Item2 && rossziranyok[0] == false)
                 {
-                    if (tablaAllas[item.Item1, item.Item2] == null)
-                    {
-                        joLepesek.Add(item);
-                    }
-                    else
-                    {
-                        if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
-                        {
-                            joLepesek.Add(item);
-                        }
-                        rossziranyok[0] = true;
-                    }
+                    rossziranyok[0] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
                 }
                 //bal le
                 else if (helyX < item.Item1 && helyY > item.Item2 && rossziranyok[1] == false)
                 {
-                    if (tablaAllas[item.Item1, item.Item2] == null)
-                    {
-                        joLepesek.Add(item);
-                    }
-                    else
-                    {
-                        if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
-                        {
-                            joLepesek.Add(item);
-                        }
-                        rossziranyok[1] = true;
-                    }
+                    rossziranyok[1] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
                 }
                 //jobb fel
                 else if (helyX > item.Item1 && helyY < item.Item2 && rossziranyok[2] == false)
                 {
-                    if (tablaAllas[item.Item1, item.Item2] == null)
-                    {
-                        joLepesek.Add(item);
-                    }
-                    else
-                    {
-                        if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
-                        {
-                            joLepesek.Add(item);
-                        }
-                        rossziranyok[2] = true;
-                    }
+                    rossziranyok[2] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
                 }
                 //bal fel
                 else if (helyX > item.Item1 && helyY > item.Item2 && rossziranyok[3] == false)
                 {
-                    if (tablaAllas[item.Item1, item.Item2] == null)
-                    {
-                        joLepesek.Add(item);
-                    }
-                    else
-                    {
-                        if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
-                        {
-                            joLepesek.Add(item);
-                        }
-                        rossziranyok[3] = true;
-                    }
+                    rossziranyok[3] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
                 }
             }
+
             return joLepesek;
+        }
+        //átadjuk az irányokat, ha abban az irányban már nem tud tovább lépni, true-t ad vissza, egyébként false-ot
+        private bool RosszEAzIrany(Babu[,] tablaAllas, Tuple<int, int> item, ref List<Tuple<int, int>> joLepesek)
+        {
+            if (tablaAllas[item.Item1, item.Item2] == null)
+            {
+                joLepesek.Add(item);
+                return false;
+            }
+            else
+            {
+                if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
+                {
+                    joLepesek.Add(item);
+                }
+                return true;
+            }
         }
 
         public override Babu Copy(Babu hova)

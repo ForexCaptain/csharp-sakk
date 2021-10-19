@@ -8,74 +8,45 @@ namespace sakk
 {
     class Program
     {
-        static void Main(string[] args)
+        static char[] betuk = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
+        static string kijon = "feher";
+
+        static bool SikeresLepesE(string honnan, Tabla s)
         {
-            //ToDo: Tesztprogram befejezése
-            string kijon = "feher";
-            Tabla s;
-            Console.Write("Szeretne egy már elkezdett játékot folytatni? (i/n): ");
-            if (Console.ReadLine() == "i")
+            if (Array.IndexOf(betuk, honnan[0]) >= 0 && honnan.Length > 1 && int.TryParse(honnan[1].ToString(), out int kezdoY))
             {
-                //Elkezdett játék betöltése
-                Console.Write("Adja meg a fájl nevét! (pl.: mentes.txt): ");
-                s = new Tabla(Console.ReadLine());              
-            }
-            else
-                //Új játék kezdése
-                s = new Tabla();
-            Console.WriteLine("Kilépéshez írjon '-' karaktert!");
-            s.TablaKirajzolas();
-            char[] betuk = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
-            bool stop = false;
-            do
-            {
-                Console.WriteLine((kijon == "feher" ? "Fehér" : "Fekete") + " következik.");
-                Console.Write("Melyik bábuval szeretne lépni? (pl.: a1): ");
-                string honnan = Console.ReadLine();
-                if (honnan != "-")
+                if (s.tablaAllas[Array.IndexOf(betuk, honnan[0]), 8 - kezdoY] != null && s.tablaAllas[Array.IndexOf(betuk, honnan[0]), 8 - kezdoY].Szin == kijon)
                 {
-                    if (Array.IndexOf(betuk, honnan[0]) >= 0 && honnan.Length > 1 && int.TryParse(honnan[1].ToString(), out int kezdoY))
+                    int kezdoX = Array.IndexOf(betuk, honnan[0]);
+                    kezdoY = 8 - kezdoY;
+                    Console.Write("Melyik mezőre szeretne lépni? (pl.: a1): ");
+                    string hova = Console.ReadLine();
+                    if (hova != "-")
                     {
-                        if (s.tablaAllas[Array.IndexOf(betuk, honnan[0]), 8 - kezdoY] != null && s.tablaAllas[Array.IndexOf(betuk, honnan[0]), 8 - kezdoY].Szin == kijon) 
+                        if (Array.IndexOf(betuk, hova[0]) >= 0 && hova.Length > 1 && int.TryParse(hova[1].ToString(), out int celY))
                         {
-                            int kezdoX = Array.IndexOf(betuk, honnan[0]);
-                            kezdoY = 8 - kezdoY;
-                            Console.Write("Melyik mezőre szeretne lépni? (pl.: a1): ");
-                            string hova = Console.ReadLine();
-                            if (hova != "-")
+                            int celX = Array.IndexOf(betuk, hova[0]);
+                            celY = 8 - celY;
+                            if (s.Lepes(kezdoX, kezdoY, celX, celY))
                             {
-                                if (Array.IndexOf(betuk, hova[0]) >= 0 && hova.Length > 1 && int.TryParse(hova[1].ToString(), out int celY))
-                                {
-                                    int celX = Array.IndexOf(betuk, hova[0]);
-                                    celY = 8 - celY;
-                                    if (s.Lepes(kezdoX, kezdoY, celX, celY))
-                                    {
-                                        Console.Clear();
-                                        Console.WriteLine("Kilépéshez írjon '-' karaktert!");
-                                        s.TablaKirajzolas();
-                                        if (kijon == "feher")
-                                            kijon = "fekete";
-                                        else
-                                            kijon = "feher";
-                                    }
-                                    else
-                                        Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
-                                }
+                                Console.Clear();
+                                Console.WriteLine("Kilépéshez írjon '-' karaktert!");
+                                s.TablaKirajzolas();
+                                if (kijon == "feher")
+                                    kijon = "fekete";
                                 else
-                                    Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
+                                    kijon = "feher";
+                                return true;
                             }
-                            else
-                                stop = true;
                         }
-                        else
-                            Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
                     }
-                    else
-                        Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
                 }
-                else
-                    stop = true;
-            } while (!stop);
+            }
+            return false;
+        }
+
+        static void Befejezes(Tabla s)
+        {
             Console.Write("Szeretné elmenteni az állást? (i/n): ");
             if (Console.ReadLine() == "i")
             {
@@ -94,6 +65,43 @@ namespace sakk
                         Console.WriteLine("Hibás fájlnév! Adjon meg egy új fájlnevet!");
                 }
             }
+        }
+
+        static void Main(string[] args)
+        {    
+            Tabla s;
+            Console.Write("Szeretne egy már elkezdett játékot folytatni? (i/n): ");
+            if (Console.ReadLine() == "i")
+            {
+                //Elkezdett játék betöltése
+                Console.Write("Adja meg a fájl nevét! (pl.: mentes.txt): ");
+                s = new Tabla(Console.ReadLine());
+            }
+            else
+                //Új játék kezdése
+                s = new Tabla();
+            Console.WriteLine("Kilépéshez írjon '-' karaktert!");
+            s.TablaKirajzolas();
+            
+            bool stop = false;
+            do
+            {
+                Console.WriteLine((kijon == "feher" ? "Fehér" : "Fekete") + " következik.");
+                Console.Write("Melyik bábuval szeretne lépni? (pl.: a1): ");
+                string honnan = Console.ReadLine();
+                if (honnan != "-")
+                {
+                    if (!SikeresLepesE(honnan, s))
+                    {
+                        Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
+                    }
+                }
+                else
+                    stop = true;
+            } while (!stop);
+
+            Befejezes(s);
+            
             Console.ReadKey();
         }
     }
