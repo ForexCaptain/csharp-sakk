@@ -57,11 +57,54 @@ namespace sakk
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
+            List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
 
-            //megvalósítás ide
+            bool[] rossziranyok_atlo = { false, false, false, false };
+            foreach (var item in lepesek)
+            {
+                //jobb le
+                if (helyX < item.Item1 && helyY < item.Item2 && !rossziranyok_atlo[0])
+                    rossziranyok_atlo[0] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+                //bal le
+                else if (helyX < item.Item1 && helyY > item.Item2 && !rossziranyok_atlo[1])
+                    rossziranyok_atlo[1] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+                //jobb fel
+                else if (helyX > item.Item1 && helyY < item.Item2 && !rossziranyok_atlo[2])
+                    rossziranyok_atlo[2] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+                //bal fel
+                else if (helyX > item.Item1 && helyY > item.Item2 && !rossziranyok_atlo[3])
+                    rossziranyok_atlo[3] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+            }
 
-            return lepesek;
+            bool[] rossziranyok = { false, false};
+            foreach (var item in lepesek)
+            {
+                if (helyX != item.Item1 && !rossziranyok[0])
+                    rossziranyok[0] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+                else if(helyY != item.Item2 && !rossziranyok[1])
+                    rossziranyok[1] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+            }
+            return joLepesek;
+            
         }
+        //átadjuk az irányokat, ha abban az irányban már nem tud tovább lépni, true-t ad vissza, egyébként false-ot
+        private bool RosszEAzIrany(Babu[,] tablaAllas, Tuple<int, int> item, ref List<Tuple<int, int>> joLepesek)
+        {
+            if (tablaAllas[item.Item1, item.Item2] == null)
+            {
+                joLepesek.Add(item);
+                return false;
+            }
+            else
+            {
+                if (tablaAllas[item.Item1, item.Item2].Szin != Szin)
+                    joLepesek.Add(item);
+                return true;
+            }
+        }
+
+            
+        
 
         public override Babu Copy(Babu hova)
         {
