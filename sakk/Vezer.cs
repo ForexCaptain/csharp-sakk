@@ -60,6 +60,7 @@ namespace sakk
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
 
             bool[] rossziranyok_atlo = { false, false, false, false };
+            bool[] rossziranyok = { false, false, false, false };
             foreach (var item in lepesek)
             {
                 //jobb le
@@ -74,19 +75,25 @@ namespace sakk
                 //bal fel
                 else if (helyX > item.Item1 && helyY > item.Item2 && !rossziranyok_atlo[3])
                     rossziranyok_atlo[3] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+
+                //fel
+                else if (helyX == item.Item1 && helyY > item.Item2 && !rossziranyok[0])
+                    rossziranyok[0] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+                //le
+                else if (helyX == item.Item1 && helyY < item.Item2 && !rossziranyok[1])
+                    rossziranyok[1] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+                //balra
+                else if (helyY == item.Item2 && helyX > item.Item1 && !rossziranyok[2])
+                    rossziranyok[2] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+                //jobbra
+                else if (helyY == item.Item2 && helyX < item.Item1 && !rossziranyok[3])
+                    rossziranyok[3] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
             }
 
-            bool[] rossziranyok = { false, false};
-            foreach (var item in lepesek)
-            {
-                if (helyX != item.Item1 && !rossziranyok[0])
-                    rossziranyok[0] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
-                else if(helyY != item.Item2 && !rossziranyok[1])
-                    rossziranyok[1] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
-            }
             return joLepesek;
             
         }
+
         //átadjuk az irányokat, ha abban az irányban már nem tud tovább lépni, true-t ad vissza, egyébként false-ot
         private bool RosszEAzIrany(Babu[,] tablaAllas, Tuple<int, int> item, ref List<Tuple<int, int>> joLepesek)
         {
@@ -102,9 +109,6 @@ namespace sakk
                 return true;
             }
         }
-
-            
-        
 
         public override Babu Copy(Babu hova)
         {

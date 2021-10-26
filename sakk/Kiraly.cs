@@ -44,14 +44,14 @@ namespace sakk
             return joLepesek;
         }
 
-        public bool SakkbanVanE(Babu[,] tablaAllas)
+        public static bool SakkbanVanE(Kiraly kiraly, Babu[,] tablaAllas)
         {
             bool sakk = false;
             foreach (var item in tablaAllas)
             {
-                if (item != null && item?.Szin != Szin)
+                if (item != null && item?.Szin != kiraly.Szin)
                 {
-                    if (item.JoLepesek(tablaAllas).Contains(new Tuple<int, int>(HelyX, HelyY)))
+                    if (item.JoLepesek(tablaAllas).Contains(new Tuple<int, int>(kiraly.HelyX, kiraly.HelyY)))
                         sakk = true;
                 }
             }

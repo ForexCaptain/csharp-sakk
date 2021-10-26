@@ -41,13 +41,21 @@ namespace sakk
             List<Tuple<int, int>> lepesek = LehetsegesLepesek();
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
             
-            bool[] rossziranyok = { false, false};
+            bool[] rossziranyok = { false, false, false, false};
             foreach (var item in lepesek)
             {
-                if (helyX != item.Item1 && !rossziranyok[0])
+                //fel
+                if (helyX == item.Item1 && helyY > item.Item2&& !rossziranyok[0])
                     rossziranyok[0] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
-                else if(helyY != item.Item2 && !rossziranyok[1])
+                //le
+                else if(helyX == item.Item1 && helyY < item.Item2 && !rossziranyok[1])
                     rossziranyok[1] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+                //balra
+                else if (helyY == item.Item2 && helyX > item.Item1 && !rossziranyok[2])
+                    rossziranyok[2] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
+                //jobbra
+                else if (helyY == item.Item2 && helyX < item.Item1 && !rossziranyok[3])
+                    rossziranyok[3] = RosszEAzIrany(tablaAllas, item, ref joLepesek);
             }
 
             return joLepesek;

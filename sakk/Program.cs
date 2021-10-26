@@ -4,6 +4,10 @@ namespace sakk
 {
     class Program
     {
+        public enum LepesEredmeny
+        {
+            Sikeres, Szabalytalan, Sakk
+        }
         static Tabla Inditas()
         {
             Tabla s;
@@ -23,7 +27,7 @@ namespace sakk
             return s;
         }
 
-        static bool SikeresLepesE(string honnan, Tabla s)
+        static LepesEredmeny SikeresLepesE(string honnan, Tabla s)
         {
             char[] betuk = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
             //jó karakter-e
@@ -40,20 +44,29 @@ namespace sakk
                     int celX = Array.IndexOf(betuk, hova[0]);
                     celY = 8 - celY;
                     //megtörtént-e a lépés
-                    if (s.Lepes(kezdoX, kezdoY, celX, celY))
+                    LepesEredmeny eredmeny = s.Lepes(kezdoX, kezdoY, celX, celY);
+                    if (eredmeny == LepesEredmeny.Sikeres)
                     {
                         Console.Clear();
                         Console.WriteLine("Kilépéshez írjon '-' karaktert!");
-                        s.TablaKirajzolas();
+                        s.TablaKirajzolas();               
                         if (s.Kijon == "feher")
+                        {
+                            Console.WriteLine(Kiraly.SakkbanVanE(s.FeketeKiraly, s.tablaAllas) ? "A fekete király sakkban van!" : "");
                             s.Kijon = "fekete";
+                        }
                         else
+                        {
+                            Console.WriteLine(Kiraly.SakkbanVanE(s.FeherKiraly, s.tablaAllas) ? "A fehér király sakkban van!" : "");
                             s.Kijon = "feher";
-                        return true;
+                        }
+                        return LepesEredmeny.Sikeres;
                     }
+                    else if (eredmeny == LepesEredmeny.Sakk)
+                        return LepesEredmeny.Sakk;
                 }
             }
-            return false;
+            return LepesEredmeny.Szabalytalan;
         }
 
         static void Befejezes(Tabla s)
@@ -91,13 +104,22 @@ namespace sakk
                 string honnan = Console.ReadLine();
                 if (honnan != "-")
                 {
-                    if (!SikeresLepesE(honnan, s))
+                    LepesEredmeny eredmeny = SikeresLepesE(honnan, s);
+                    if (eredmeny != LepesEredmeny.Sikeres)
                     {
                         Console.Clear();
                         Console.WriteLine("Kilépéshez írjon '-' karaktert!");
                         s.TablaKirajzolas();
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
+                        if (eredmeny == LepesEredmeny.Sakk)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Hibás lépés! A király sakkba kerül!");
+                        }
+                        if (eredmeny == LepesEredmeny.Szabalytalan)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine("Hibás lépés! Adjon meg egy szabályos lépést!");
+                        }                      
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                 }
