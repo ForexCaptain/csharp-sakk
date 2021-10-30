@@ -65,6 +65,64 @@ namespace sakk
             return joLepesek;
         }
 
+        public void GyalogAtvaltozas(Babu[,] tablaAllas)
+        {
+            if (Szin == "fekete" && HelyY==7)
+	        {
+                Console.WriteLine("Milyen bábura szeretne cserélni? ");
+                string valasztas = Console.ReadLine();
+                switch (valasztas)
+                    {
+                        case "B":
+                            tablaAllas[HelyX,HelyY] = new Bastya(HelyX,HelyY,"fekete");
+                            break;
+                        case "H":
+                            tablaAllas[HelyX,HelyY] = new Huszar(HelyX,HelyY,"fekete");
+                            break;
+                        case "F":
+                            tablaAllas[HelyX,HelyY] = new Futo(HelyX,HelyY,"fekete");
+                            break;
+                        case "V":
+                            tablaAllas[HelyX,HelyY] = new Vezer(HelyX,HelyY,"fekete");
+                            break;
+                        case "K":
+                            tablaAllas[HelyX,HelyY] = new Kiraly(HelyX,HelyY,"fekete");
+                            break;
+                        case "G":
+                            tablaAllas[HelyX,HelyY] = new Gyalog(HelyX,HelyY,"fekete");
+                            break;
+                    }
+	        }
+
+            else if (Szin == "feher" && HelyY==0)
+	        {
+                Console.WriteLine("Milyen bábura szeretne cserélni? ");
+                string valasztas = Console.ReadLine();
+                switch (valasztas)
+                    {
+                        case "B":
+                            tablaAllas[HelyX,HelyY] = new Bastya(HelyX,HelyY,"feher");
+                            break;
+                        case "H":
+                            tablaAllas[HelyX,HelyY] = new Huszar(HelyX,HelyY,"feher");
+                            break;
+                        case "F":
+                            tablaAllas[HelyX,HelyY] = new Futo(HelyX,HelyY,"feher");
+                            break;
+                        case "V":
+                            tablaAllas[HelyX,HelyY] = new Vezer(HelyX,HelyY,"feher");
+                            break;
+                        case "K":
+                            tablaAllas[HelyX,HelyY] = new Kiraly(HelyX,HelyY,"feher");
+                            break;
+                        case "G":
+                            tablaAllas[HelyX,HelyY] = new Gyalog(HelyX,HelyY,"feher");
+                            break;
+                    }
+	        }
+            
+        }
+
         public override Babu Copy(Babu hova)
         {
             hova = new Gyalog(HelyX, HelyY, Szin);
