@@ -10,7 +10,7 @@ namespace sakk
             Tipus = BabuTipus.Gyalog;
         }
 
-        public override List<Tuple<int, int>> LehetsegesLepesek()
+        protected override IEnumerable<Tuple<int, int>> LehetsegesLepesek()
         {
             List<Tuple<int, int>> lehetsegesLepesek = new List<Tuple<int, int>>();
 
@@ -48,7 +48,7 @@ namespace sakk
 
         public override List<Tuple<int, int>> JoLepesek(Babu[,] tablaAllas)
         {
-            List<Tuple<int, int>> lepesek = LehetsegesLepesek();
+            IEnumerable<Tuple<int, int>> lepesek = LehetsegesLepesek();
             List<Tuple<int, int>> joLepesek = new List<Tuple<int, int>>();
 
             foreach (var item in lepesek)
