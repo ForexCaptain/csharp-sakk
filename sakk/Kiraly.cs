@@ -51,7 +51,7 @@ namespace sakk
             {
                 if (item != null && item?.Szin != kiraly.Szin)
                 {
-                    if (item.JoLepesek(tablaAllas).Contains(new Tuple<int, int>(kiraly.HelyX, kiraly.HelyY)))
+                    if (item.JoLepesek(tablaAllas).Contains(new Tuple<int, int>(kiraly.helyX, kiraly.helyY)))
                         sakk = true;
                 }
             }
@@ -60,7 +60,7 @@ namespace sakk
 
         public override Babu Copy(Babu hova)
         {
-            hova = new Kiraly(HelyX, HelyY, Szin);
+            hova = new Kiraly(helyX, helyY, Szin);
             return hova;
         }
     }

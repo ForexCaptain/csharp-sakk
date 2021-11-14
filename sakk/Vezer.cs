@@ -112,7 +112,7 @@ namespace sakk
 
         public override Babu Copy(Babu hova)
         {
-            hova = new Vezer(HelyX, HelyY, Szin);
+            hova = new Vezer(helyX, helyY, Szin);
             return hova;
         }
     }

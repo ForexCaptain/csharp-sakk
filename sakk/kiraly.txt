@@ -1,0 +1,22 @@
+﻿
+K 4 0 fekete
+
+G 0 1 fekete
+G 1 1 fekete
+G 2 1 fekete
+G 3 1 fekete
+G 4 1 fekete
+G 5 1 fekete
+G 6 1 fekete
+G 7 1 fekete
+
+K 4 7 feher
+
+G 0 6 feher
+G 1 6 feher
+G 2 6 feher
+G 3 6 feher
+G 4 6 feher
+G 5 6 feher
+G 6 6 feher
+G 7 6 feher

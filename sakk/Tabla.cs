@@ -18,9 +18,9 @@ namespace sakk
                 if (item?.Jeloles == "K")
                 {
                     if (item.Szin == "fekete")
-                        FeketeKiraly = new Kiraly(item.HelyX, item.HelyY, "fekete");
+                        FeketeKiraly = new Kiraly(item.helyX, item.helyY, "fekete");
                     else
-                        FeherKiraly = new Kiraly(item.HelyX, item.HelyY, "feher");
+                        FeherKiraly = new Kiraly(item.helyX, item.helyY, "feher");
                 }
             }
         }
@@ -35,9 +35,9 @@ namespace sakk
                 if (item?.Jeloles == "K")
                 {
                     if (item.Szin == "fekete")
-                        FeketeKiraly = new Kiraly(item.HelyX, item.HelyY, "fekete");
+                        FeketeKiraly = new Kiraly(item.helyX, item.helyY, "fekete");
                     else
-                        FeherKiraly = new Kiraly(item.HelyX, item.HelyY, "feher");
+                        FeherKiraly = new Kiraly(item.helyX, item.helyY, "feher");
                 }
             }
         }
@@ -59,13 +59,13 @@ namespace sakk
                 {
                     if (tablaAllas[kezdoX, kezdoY].Jeloles == "K" && tablaAllas[kezdoX, kezdoY].Szin == "fekete")
                     {
-                        FeketeKiraly.HelyX = celX;
-                        FeketeKiraly.HelyY = celY;
+                        FeketeKiraly.helyX = celX;
+                        FeketeKiraly.helyY = celY;
                     }
                     else if (tablaAllas[kezdoX, kezdoY].Jeloles == "K" && tablaAllas[kezdoX, kezdoY].Szin == "feher")
                     {
-                        FeherKiraly.HelyX = celX;
-                        FeherKiraly.HelyY = celY;
+                        FeherKiraly.helyX = celX;
+                        FeherKiraly.helyY = celY;
                     }
                     Athelyez(kezdoX, kezdoY, celX, celY, ref tablaAllas);
                     return LepesEredmeny.Sikeres;
@@ -90,8 +90,8 @@ namespace sakk
 
         private void Athelyez(int kezdoX, int kezdoY, int celX, int celY, ref Babu[,] tablaAllas)
         {
-            tablaAllas[kezdoX, kezdoY].HelyX = celX;
-            tablaAllas[kezdoX, kezdoY].HelyY = celY;
+            tablaAllas[kezdoX, kezdoY].helyX = celX;
+            tablaAllas[kezdoX, kezdoY].helyY = celY;
             tablaAllas[celX, celY] = tablaAllas[kezdoX, kezdoY].Copy(tablaAllas[celX, celY]);
             tablaAllas[kezdoX, kezdoY] = null;
         }

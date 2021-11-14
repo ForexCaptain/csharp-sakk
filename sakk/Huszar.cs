@@ -54,7 +54,7 @@ namespace sakk
 
         public override Babu Copy(Babu hova)
         {
-            hova = new Huszar(HelyX, HelyY, Szin);
+            hova = new Huszar(helyX, helyY, Szin);
             return hova;
         }
     }

@@ -67,7 +67,7 @@ namespace sakk
 
         public override Babu Copy(Babu hova)
         {
-            hova = new Gyalog(HelyX, HelyY, Szin);
+            hova = new Gyalog(helyX, helyY, Szin);
             return hova;
         }
     }

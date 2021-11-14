@@ -78,7 +78,7 @@ namespace sakk
 
         public override Babu Copy(Babu hova)
         {
-            hova = new Futo(HelyX, HelyY, Szin);
+            hova = new Futo(helyX, helyY, Szin);
             return hova;
         }
     }

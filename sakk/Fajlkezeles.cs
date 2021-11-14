@@ -55,7 +55,7 @@ namespace sakk
                 {
                     if (allas[i, j] != null)
                     {
-                        iras.WriteLine($"{allas[i, j].Jeloles} {allas[i, j].HelyX} {allas[i, j].HelyY} {allas[i, j].Szin}");
+                        iras.WriteLine($"{allas[i, j].Jeloles} {allas[i, j].helyX} {allas[i, j].helyY} {allas[i, j].Szin}");
                     }
                 }
             }

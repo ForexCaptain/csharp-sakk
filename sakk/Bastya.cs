@@ -79,7 +79,7 @@ namespace sakk
 
         public override Babu Copy(Babu hova)
         {
-            hova = new Bastya(HelyX, HelyY, Szin);
+            hova = new Bastya(helyX, helyY, Szin);
             return hova;
         }
     }

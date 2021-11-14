@@ -5,8 +5,8 @@ namespace sakk
 {
     abstract class Babu
     {
-        protected int helyX;
-        protected int helyY;
+        public int helyX;
+        public int helyY;
         public enum BabuTipus
         {
             Bastya, Huszar, Futo, Kiraly, Vezer, Gyalog
@@ -19,9 +19,6 @@ namespace sakk
             Szin = szin;
             Jeloles = " ";
         }
-
-        public int HelyX { get { return helyX; } set { helyX = value; } }
-        public int HelyY { get { return helyY; } set { helyY = value; } }
 
         public abstract string Jeloles { get; protected set; }
         public string Szin { get; set; }
