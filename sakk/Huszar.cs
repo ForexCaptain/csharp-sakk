@@ -5,13 +5,11 @@ namespace sakk
 {
     class Huszar : Babu
     {
-        public Huszar(int helyX, int helyY, string szin) : base(helyX, helyY, szin)
+        public Huszar(int helyX, int helyY, string szin, string jeloles="H") : base(helyX, helyY, szin, jeloles)
         {
             Tipus = BabuTipus.Huszar;
-            Jeloles = "H";
+            
         }
-
-        public override string Jeloles { get; protected set; }
 
         public override List<Tuple<int, int>> LehetsegesLepesek()
         {
@@ -54,7 +52,7 @@ namespace sakk
 
         public override Babu Copy(Babu hova)
         {
-            hova = new Huszar(helyX, helyY, Szin);
+            hova = new Huszar(helyX, helyY, Szin, Jeloles);
             return hova;
         }
     }

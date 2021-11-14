@@ -5,13 +5,10 @@ namespace sakk
 {
     class Bastya : Babu
     {
-        public Bastya(int helyX, int helyY, string szin) : base(helyX, helyY, szin)
+        public Bastya(int helyX, int helyY, string szin, string jeloles="B") : base(helyX, helyY, szin, jeloles)
         {
             Tipus = BabuTipus.Bastya;
-            Jeloles = "B";
         }
-
-        public override string Jeloles { get; protected set; }
 
         public override List<Tuple<int, int>> LehetsegesLepesek()
         {
@@ -79,7 +76,7 @@ namespace sakk
 
         public override Babu Copy(Babu hova)
         {
-            hova = new Bastya(helyX, helyY, Szin);
+            hova = new Bastya(helyX, helyY, Szin, Jeloles);
             return hova;
         }
     }

@@ -11,16 +11,17 @@ namespace sakk
         {
             Bastya, Huszar, Futo, Kiraly, Vezer, Gyalog
         }
+        public string jeloles;
 
-        public Babu(int helyX, int helyY, string szin)
+        public Babu(int helyX, int helyY, string szin, string jeloles)
         {
             this.helyX = helyX;
             this.helyY = helyY;
             Szin = szin;
-            Jeloles = " ";
+            Jeloles = jeloles;
         }
 
-        public abstract string Jeloles { get; protected set; }
+        public string Jeloles { get; set; }
         public string Szin { get; set; }
         public BabuTipus Tipus { get; protected set; }
 
